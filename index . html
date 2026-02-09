@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Valentine for Jaani 💖</title>
+
+  <style>
+    :root{
+      --pink1:#ff9a9e;
+      --pink2:#fad0c4;
+      --hot:#ff3d6e;
+      --dark:#222;
+    }
+
+    *{box-sizing:border-box;}
+    body{
+      margin:0;
+      height:100vh;
+      overflow:hidden;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: linear-gradient(135deg, var(--pink1), var(--pink2));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+    }
+
+    .screen{
+      width:min(440px, 92vw);
+      background: rgba(255,255,255,0.92);
+      border-radius:26px;
+      padding:20px 18px 22px;
+      box-shadow: 0 18px 55px rgba(0,0,0,0.18);
+      text-align:center;
+      position:relative;
+      backdrop-filter: blur(8px);
+      animation: popIn .6s ease;
+      z-index:10;
+    }
+
+    @keyframes popIn{
+      from{transform:scale(.85); opacity:0;}
+      to{transform:scale(1); opacity:1;}
+    }
+
+    h1,h2{
+      margin: 8px 0 10px;
+      color: var(--hot);
+      font-size: 22px;
+      line-height: 1.2;
+    }
+
+    p{
+      margin: 6px 0 12px;
+      color: var(--dark);
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .emojiRow{
+      font-size: 24px;
+      margin-bottom: 10px;
+      animation: wiggle 1.8s ease-in-out infinite;
+    }
+    @keyframes wiggle{
+      0%,100%{transform:rotate(0deg)}
+      50%{transform:rotate(2deg)}
+    }
+
+    .btnRow{
+      margin-top: 14px;
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      align-items:center;
+      position:relative;
+      height:64px;
+    }
+
+    button{
+      border:none;
+      cursor:pointer;
+      font-size:16px;
+      padding:12px 22px;
+      border-radius:999px;
+      transition: transform .12s ease, box-shadow .12s ease;
+      user-select:none;
+    }
+    button:active{transform:scale(.96);}
+
+    .yes{
+      background: var(--hot);
+      color:white;
+      box-shadow: 0 10px 25px rgba(255, 61, 110, 0.35);
+    }
+    .yes:hover{transform: translateY(-1px);}
+
+    .no{
+      background:#e9e9e9;
+      color:#333;
+      position:absolute;
+      left: 55%;
+      top: 8px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.10);
+    }
+
+    .ok{
+      background: #111;
+      color:#fff;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+    }
+
+    .tiny{
+      font-size: 12px;
+      opacity:.75;
+      margin-top: 10px;
+    }
+
+    /* Music button */
+    .musicBtn{
+      position:fixed;
+      top:14px;
+      right:14px;
+      background: rgba(255,255,255,0.75);
+      border: 1px solid rgba(0,0,0,0.08);
+      padding:10px 14px;
+      border-radius:999px;
+      font-size:14px;
+      cursor:pointer;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+      z-index:999;
+    }
+
+    /* Floating hearts */
+    .heart{
+      position:fixed;
+      bottom:-30px;
+      font-size: 18px;
+      pointer-events:none;
+      animation: floatUp linear forwards;
+      opacity:.95;
+      filter: drop-shadow(0 8px 10px rgba(0,0,0,.12));
+      z-index:1;
+    }
+    @keyframes floatUp{
+      to{
+        transform: translateY(-120vh) translateX(var(--drift));
+        opacity:0;
+      }
+    }
+
+    /* Confetti */
+    .confetti{
+      position:fixed;
+      width:10px;
+      height:14px;
+      top:-20px;
+      left:0;
+      pointer-events:none;
+      opacity:.95;
+      animation: confFall linear forwards;
+      border-radius:3px;
+      z-index:2;
+    }
+    @keyframes confFall{
+      to{
+        transform: translateY(120vh) rotate(720deg);
+        opacity:0.2;
+      }
+    }
+
+    /* Flower pop */
+    .flower{
+      position:fixed;
+      font-size: 22px;
+      pointer-events:none;
+      animation: flowerPop .9s ease forwards;
+      filter: drop-shadow(0 10px 14px rgba(0,0,0,.15));
+      z-index:3;
+    }
+    @keyframes flowerPop{
+      0%{transform:scale(.3); opacity:0;}
+      50%{transform:scale(1.3); opacity:1;}
+      100%{transform:scale(.9); opacity:0;}
+    }
+
+    /* GIF wrap */
+    .gifWrap{
+      margin-top: 10px;
+      border-radius: 22px;
+      overflow:hidden;
+      box-shadow: 0 12px 35px rgba(0,0,0,0.18);
+      border: 6px solid rgba(255, 61, 110, 0.25);
+    }
+    .gifWrap img{
+      width:100%;
+      display:block;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Music Button -->
+  <button class="musicBtn" id="musicBtn">🎶 Play</button>
+
+  <!-- Romantic Royalty-Free Music -->
+  <audio id="bgMusic" loop>
+    <source src="https://incompetech.com/music/royalty-free/mp3-royaltyfree/Dream%20Culture.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- SCREEN 1 -->
+  <div class="screen" id="screen1">
+    <div class="emojiRow">💘😂🌸💖😈💐</div>
+    <h1>Jaani, will you be my Valentine? 💗</h1>
+    <p>From: <b>Rizz</b> (your future headache 😭)</p>
+
+    <div class="btnRow">
+      <button class="yes" id="yesBtn">Yes 😍</button>
+      <button class="no" id="noBtn">No 🙄</button>
+    </div>
+
+    <p class="tiny">Tip: Try clicking “No” 😌</p>
+  </div>
+
+  <!-- SCREEN 2 -->
+  <div class="screen" id="screen2" style="display:none;">
+    <div class="emojiRow">😤💗😂💐</div>
+    <h2>Wait wait WAIT 😭</h2>
+    <p>
+      Jaani… you clicked YES?? 😳💘 <br>
+      Are you 100% sure? <br>
+      Because once you press OK… you’re stuck with Rizz forever 😈
+    </p>
+
+    <button class="ok" id="okBtn">OK 😌</button>
+
+    <p class="tiny">No refunds. No exchange. Only love 💖</p>
+  </div>
+
+  <!-- SCREEN 3 -->
+  <div class="screen" id="screen3" style="display:none;">
+    <div class="emojiRow">🎉💖💐😂💘</div>
+    <h2>YAYYYYY Jaani!!! 😭❤️</h2>
+    <p>
+      You just made <b>Rizz</b> the happiest person today 😌💗<br>
+      Now you’re officially my Valentine 💘✨
+    </p>
+
+    <div class="gifWrap">
+      <img src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif" alt="Celebration GIF" />
+    </div>
+
+    <p class="tiny">
+      PS: If you try to say “No” now… the button already ran away 😭😂
+    </p>
+  </div>
+
+<script>
+  const noBtn = document.getElementById("noBtn");
+  const yesBtn = document.getElementById("yesBtn");
+  const okBtn = document.getElementById("okBtn");
+
+  const screen1 = document.getElementById("screen1");
+  const screen2 = document.getElementById("screen2");
+  const screen3 = document.getElementById("screen3");
+
+  // Music
+  const musicBtn = document.getElementById("musicBtn");
+  const bgMusic = document.getElementById("bgMusic");
+  let playing = false;
+
+  async function startMusic(){
+    try{
+      await bgMusic.play();
+      playing = true;
+      musicBtn.innerText = "⏸ Pause";
+    } catch(e){
+      // If blocked, user can tap Play button
+    }
+  }
+
+  musicBtn.addEventListener("click", async () => {
+    try{
+      if(!playing){
+        await bgMusic.play();
+        playing = true;
+        musicBtn.innerText = "⏸ Pause";
+      } else {
+        bgMusic.pause();
+        playing = false;
+        musicBtn.innerText = "🎶 Play";
+      }
+    } catch(e){
+      alert("Tap again 😭 (browser blocked autoplay)");
+    }
+  });
+
+  // NO button running texts
+  const noTexts = [
+    "No 🙄",
+    "Still No 😤",
+    "Stop 😭",
+    "Jaani pls 😭",
+    "Rizz is crying 😢",
+    "Okay fine 😒",
+    "No means yes 😈",
+    "Try harder 😏",
+    "Nope 😂",
+    "Catch me first 🏃‍♂️"
+  ];
+  let noCount = 0;
+
+  function randomMove() {
+    const cardRect = screen1.getBoundingClientRect();
+    const maxX = cardRect.width - noBtn.offsetWidth - 20;
+    const maxY = 64 - noBtn.offsetHeight;
+
+    const x = 20 + Math.random() * maxX;
+    const y = 0 + Math.random() * maxY;
+
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+
+    noBtn.innerText = noTexts[noCount % noTexts.length];
+    noCount++;
+
+    flowerPop(cardRect.left + x + 40, cardRect.top + 120);
+  }
+
+  noBtn.addEventListener("mouseenter", randomMove);
+  noBtn.addEventListener("click", randomMove);
+  noBtn.addEventListener("touchstart", (e) => {
+    e.preventDefault();
+    randomMove();
+  }, {passive:false});
+
+  // YES -> screen2 + START MUSIC automatically
+  yesBtn.addEventListener("click", () => {
+    startMusic(); // starts after user click = works on phone
+    burstConfetti(80);
+    for(let i=0;i<14;i++){
+      setTimeout(()=>heartFloat(), i*70);
+    }
+    screen1.style.display = "none";
+    screen2.style.display = "block";
+  });
+
+  // OK -> screen3
+  okBtn.addEventListener("click", () => {
+    burstConfetti(150);
+    for(let i=0;i<25;i++){
+      setTimeout(()=>heartFloat(), i*60);
+    }
+    screen2.style.display = "none";
+    screen3.style.display = "block";
+
+    setInterval(()=>heartFloat(), 260);
+    setInterval(()=>burstConfetti(12), 1200);
+  });
+
+  // Hearts
+  function heartFloat(){
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerText = ["💖","💗","💘","💕","🌸","💐","😍"][Math.floor(Math.random()*7)];
+
+    const left = Math.random() * 100;
+    const dur = 4 + Math.random() * 3;
+    const drift = (Math.random() * 140 - 70) + "px";
+
+    heart.style.left = left + "vw";
+    heart.style.animationDuration = dur + "s";
+    heart.style.setProperty("--drift", drift);
+
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(), dur*1000);
+  }
+
+  // Confetti
+  function burstConfetti(amount=40){
+    for(let i=0;i<amount;i++){
+      const c = document.createElement("div");
+      c.className = "confetti";
+      c.style.left = Math.random()*100 + "vw";
+      c.style.animationDuration = (3 + Math.random()*3) + "s";
+      c.style.transform = `rotate(${Math.random()*360}deg)`;
+      c.style.background = ["#ff3d6e","#ffd166","#06d6a0","#118ab2","#8338ec","#ff7aa2"][Math.floor(Math.random()*6)];
+      c.style.width = (6 + Math.random()*10) + "px";
+      c.style.height = (8 + Math.random()*14) + "px";
+      document.body.appendChild(c);
+      setTimeout(()=>c.remove(), 6500);
+    }
+  }
+
+  // Flowers pop
+  function flowerPop(x,y){
+    const f = document.createElement("div");
+    f.className = "flower";
+    f.innerText = ["🌸","🌺","💐","🌷","🪷"][Math.floor(Math.random()*5)];
+    f.style.left = x + "px";
+    f.style.top = y + "px";
+    document.body.appendChild(f);
+    setTimeout(()=>f.remove(), 900);
+  }
+
+  // Start background hearts always
+  setInterval(()=>heartFloat(), 520);
+</script>
+
+</body>
+</html>
